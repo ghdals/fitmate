@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/LandingPage";
 import LibraryPage from "../pages/LibraryPage";
 import DetailPage from "/src/pages/DetailPage";
+import RegisterPage from "../pages/RegisterPage";
 import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
@@ -11,6 +12,7 @@ const AppRoutes = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
