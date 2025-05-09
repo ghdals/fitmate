@@ -7,6 +7,7 @@ import RegisterPage from "../pages/RegisterPage";
 import NotFound from "../pages/NotFound";
 import Step1Page from "../pages/Step1Page";
 import Step2Page from "../pages/Step2Page";
+import LoginPage from "../pages/LoginPage";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/step1" element={<Step1Page />} />
         <Route path="/step2" element={<Step2Page />} />
         <Route path="*" element={<NotFound />} />
