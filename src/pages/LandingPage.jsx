@@ -1,26 +1,69 @@
 import logo from "../assets/logo.svg";
-
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen w-full bg-black text-white">
-      <div className="flex flex-col items-center justify-center h-screen w-full">
-        <img src={logo} alt="동양 캐릭터" className="h-50" />
-        <h1 className="text-5xl font-bold">FITMATE</h1>
-        <p className="mt-4 text-lg">당신을 위한 맞춤형 운동 플랜</p>
-        <button
-          className="mt-6 px-6 py-3 bg-blue-500 text-white text-lg rounded-lg shadow-md hover:bg-blue-600"
-          onClick={() => navigate("/step1")}
-        >
-          시작하기
-        </button>
-      </div>
-    </section>
+    <>
+      {/* Hero Section */}
+      <section className="flex flex-col items-center justify-center min-h-screen w-full bg-black text-white px-4">
+        <div className="flex flex-col items-center justify-center pt-24">
+          <img src={logo} alt="동양 캐릭터" className="h-40 mb-6" />
+          <h1 className="text-5xl font-bold">FITMATE</h1>
+          <p className="mt-4 text-lg text-gray-300">AI 기반 맞춤 운동 플랜</p>
+          <button
+            className="mt-6 px-6 py-3 bg-blue-500 text-white text-lg rounded-lg shadow-md hover:bg-blue-600"
+            onClick={() => navigate("/step1")}
+          >
+            시작하기
+          </button>
+        </div>
+      </section>
+
+      {/* 목적 설명 */}
+      <section className="bg-white py-16 px-8 text-black text-center">
+        <h2 className="text-3xl font-bold mb-6">왜 FITMATE인가요?</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          FITMATE는 여러분의 운동 경험, 목표, 일정 등을 분석하여
+          <br />
+          개인 맞춤형 운동 루틴을 제공하는 AI 트레이너입니다.
+        </p>
+      </section>
+
+      {/* 이용 방법 가이드 */}
+      <section className="bg-gray-50 py-20 px-8 text-black">
+        <h2 className="text-3xl font-bold text-center mb-12">이용 방법</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <h3 className="text-xl font-semibold mb-2">1. 기본 정보 입력</h3>
+            <p>키, 몸무게, 성별을 입력하세요</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">2. 운동 레벨 선택</h3>
+            <p>초급, 중급, 상급 중 자신의 수준을 골라요</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">3. 목표 설정</h3>
+            <p>감량, 벌크업, 유지 중 하나를 선택하세요</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">4. 운동 빈도 선택</h3>
+            <p>일주일에 운동 가능한 횟수를 알려주세요</p>
+          </div>
+        </div>
+
+        <div className="mt-12 text-center">
+          <button
+            className="px-6 py-3 bg-blue-500 text-white text-lg rounded-lg shadow-md hover:bg-blue-600"
+            onClick={() => navigate("/step1")}
+          >
+            지금 시작하기
+          </button>
+        </div>
+      </section>
+    </>
   );
 };
 
-  
-  export default LandingPage;
+export default LandingPage;

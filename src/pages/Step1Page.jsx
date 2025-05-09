@@ -1,25 +1,24 @@
+// pages/step1-page.jsx
 import { useNavigate } from "react-router-dom";
 import { StepLayout } from "../components/step-layout";
 import { Button } from "../components/button";
 import { Field, Label } from "../components/fieldset";
 import { Heading } from "../components/heading";
 import { Input } from "../components/input";
+import { StepIndicator } from "../components/StepIndicator";
 
 function Step1Page() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // 새로고침 방지
-    // 나중에 사용자 입력 검증/저장 등을 여기에 추가
+    e.preventDefault();
     navigate("/step2");
   };
 
   return (
     <StepLayout>
-      <form
-        onSubmit={handleSubmit}
-        className="grid w-full grid-cols-1 gap-6"
-      >
+      <StepIndicator />
+      <form onSubmit={handleSubmit} className="grid w-full grid-cols-1 gap-6">
         <Heading>기본 정보를 입력해 주세요</Heading>
 
         <Field>
