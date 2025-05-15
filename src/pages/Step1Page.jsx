@@ -1,25 +1,23 @@
+// src/pages/Step1Page.jsx
 import { useNavigate } from "react-router-dom";
 import { StepLayout } from "../components/step-layout";
 import { Button } from "../components/button";
 import { Field, Label } from "../components/fieldset";
 import { Heading } from "../components/heading";
 import { Input } from "../components/input";
+import { StepIndicator } from "../components/StepIndicator";
 
 function Step1Page() {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // 새로고침 방지
-    // 나중에 사용자 입력 검증/저장 등을 여기에 추가
+  const handleNext = () => {
     navigate("/step2");
   };
 
   return (
     <StepLayout>
-      <form
-        onSubmit={handleSubmit}
-        className="grid w-full grid-cols-1 gap-6"
-      >
+      <StepIndicator />
+      <form className="grid w-full grid-cols-1 gap-6">
         <Heading>기본 정보를 입력해 주세요</Heading>
 
         <Field>
@@ -35,16 +33,20 @@ function Step1Page() {
         <Field>
           <Label>성별</Label>
           <div className="flex space-x-4">
-            <Button type="button" className="flex-1 bg-zinc-800 hover:bg-zinc-700">
+            <Button type="button" className="flex-1 bg-indigo-600 hover:bg-zinc-700">
               남성
             </Button>
-            <Button type="button" className="flex-1 bg-zinc-800 hover:bg-zinc-700">
+            <Button type="button" className="flex-1 bg-indigo-600 hover:bg-zinc-700">
               여성
             </Button>
           </div>
         </Field>
 
-        <Button type="submit" className="w-full">
+        <Button
+          type="button"
+          className="w-full bg-zinc-800 hover:bg-zinc-700"
+          onClick={handleNext}
+        >
           다음
         </Button>
       </form>
