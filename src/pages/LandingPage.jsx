@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.svg";
+import { Button } from "../components/button"
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,21 +17,22 @@ const LandingPage = () => {
 
   return (
     <>
-    <section className="flex flex-col items-center justify-center min-h-screen w-full bg-black text-white">
-      <div className="flex flex-col items-center justify-center h-screen w-full">
-        <img src={logo} alt="동양 캐릭터" className="h-50" />
-        <h1 className="text-5xl font-bold">FITMATE</h1>
-        <p className="mt-4 text-lg">당신을 위한 맞춤형 운동 플랜</p>
-        <button
-          onClick={handleStartClick}
-          className="mt-6 px-6 py-3 bg-blue-500 text-white text-lg rounded-lg shadow-md hover:bg-blue-600"
-        >
-          시작하기
-        </button>
-      </div>
-    </section>
-    {/* 목적 설명 */}
-    {/* 목적 설명 */}
+      <section className="bg-gradient-to-r from-blue-200 to-cyan-200">
+        <div className="flex flex-col items-center justify-center h-screen w-full">
+          <p className="text-9xl font-mono">Fitmate</p>
+          <img src={logo} alt="동양 캐릭터" className="h-50 mt-4" />
+          <p className="mt-4 text-lg">당신을 위한 맞춤형 운동 플랜</p>
+          <Button type="button"
+            onClick={handleStartClick}
+            className="mt-6 px-6 py-3 shadow-md"
+          >
+            시작하기
+          </Button>
+        </div>
+
+      </section>
+      {/* 목적 설명 */}
+      {/* 목적 설명 */}
       <section className="bg-white py-16 px-8 text-black text-center">
         <h2 className="text-3xl font-bold mb-6">왜 FITMATE인가요?</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -41,7 +43,7 @@ const LandingPage = () => {
       </section>
 
       {/* 이용 방법 가이드 */}
-      <section className="bg-gray-50 py-20 px-8 text-black">
+      <section className="bg-teal-300 py-20 px-8 text-black">
         <h2 className="text-3xl font-bold text-center mb-12">이용 방법</h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
           <div>
@@ -64,11 +66,13 @@ const LandingPage = () => {
 
         <div className="mt-12 text-center">
           <button
-            className="px-6 py-3 bg-blue-500 text-white text-lg rounded-lg shadow-md hover:bg-blue-600"
+            type="button"
             onClick={() => navigate("/step1")}
+            className="px-6 py-3 rounded-md bg-neutral-50 text-black shadow-md hover:bg-cyan-200 transition"
           >
             지금 시작하기
           </button>
+
         </div>
       </section>
     </>

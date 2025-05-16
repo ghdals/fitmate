@@ -33,7 +33,7 @@ function Step4Page() {
           <div className="flex space-x-4">
             <Button 
               type="button" 
-              className={`flex-1 ${frequency === 1 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-zinc-700`} 
+              className={`flex-1 ${frequency === 1 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-teal-200`} 
               onClick={() => setFrequency(1)}
             >
               1회
@@ -94,7 +94,7 @@ function Step4Page() {
         <div className="flex space-x-4">
           <Button 
             type="button" 
-            className="flex-1 bg-zinc-800 hover:bg-zinc-700"
+            className="flex-1"
             onClick={handlePrev} // 이전 페이지로 이동
           >
             이전
@@ -103,7 +103,7 @@ function Step4Page() {
           {/* 다음 버튼: Step5으로 이동 */}
           <Button 
             type="button" 
-            className="flex-1 bg-zinc-800 hover:bg-zinc-700"
+            className="flex-1"
             onClick={handleNext} // Step5으로 이동
           >
             다음

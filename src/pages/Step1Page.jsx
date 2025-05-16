@@ -1,4 +1,4 @@
-// src/pages/Step1Page.jsx
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StepLayout } from "../components/step-layout";
 import { Button } from "../components/button";
@@ -9,6 +9,7 @@ import { StepIndicator } from "../components/StepIndicator";
 
 function Step1Page() {
   const navigate = useNavigate();
+  const [selectedGender, setSelectedGender] = useState(null); // 🔥 성별 선택 상태 추가
 
   const handleNext = () => {
     navigate("/step2");
@@ -33,10 +34,22 @@ function Step1Page() {
         <Field>
           <Label>성별</Label>
           <div className="flex space-x-4">
-            <Button type="button" className="flex-1 bg-indigo-600 hover:bg-zinc-700">
+            <Button
+              type="button"
+              className={`flex-1 px-4 py-2 rounded-lg ${
+                selectedGender === "남성" ? "bg-teal-400 text-white" : "bg-neutral-50"
+              }`}
+              onClick={() => setSelectedGender("남성")} // 🔥 클릭 시 상태 업데이트
+            >
               남성
             </Button>
-            <Button type="button" className="flex-1 bg-indigo-600 hover:bg-zinc-700">
+            <Button
+              type="button"
+              className={`flex-1 px-4 py-2 rounded-lg ${
+                selectedGender === "여성" ? "bg-teal-400 text-white" : "bg-neutral-50"
+              }`}
+              onClick={() => setSelectedGender("여성")} // 🔥 클릭 시 상태 업데이트
+            >
               여성
             </Button>
           </div>
@@ -44,7 +57,7 @@ function Step1Page() {
 
         <Button
           type="button"
-          className="w-full bg-zinc-800 hover:bg-zinc-700"
+          className="w-full"
           onClick={handleNext}
         >
           다음
