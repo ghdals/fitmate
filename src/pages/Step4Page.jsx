@@ -8,8 +8,8 @@ import { useState } from "react"; // 상태 관리
 
 function Step4Page() {
   const navigate = useNavigate(); // navigate 훅 사용
-  const [frequency, setFrequency] = useState(3); // 기본값: 3회
-  const [duration, setDuration] = useState(30); // 기본값: 30분
+  const [frequency, setFrequency] = useState(null);
+  const [duration, setDuration] = useState(null);
 
   const handlePrev = () => {
     navigate("/step3"); // "이전" 버튼 클릭 시 Step3으로 이동
@@ -32,60 +32,60 @@ function Step4Page() {
           <Label>운동 빈도 (주당)</Label>
           <div className="flex space-x-4">
             <Button 
-              type="button" 
-              className={`flex-1 ${frequency === 1 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-teal-200`} 
-              onClick={() => setFrequency(1)}
+              type="button" bg-teal-400 text-white
+              className={`flex-1 ${frequency === "1-2회" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
+              onClick={() => setFrequency("1-2회")}
             >
-              1회
+              1-2회
             </Button>
             <Button 
               type="button" 
-              className={`flex-1 ${frequency === 3 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-zinc-700`} 
-              onClick={() => setFrequency(3)}
+              className={`flex-1 ${frequency === "3-4회" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
+              onClick={() => setFrequency("3-4회")}
             >
-              3회
+              3-4회
             </Button>
             <Button 
               type="button" 
-              className={`flex-1 ${frequency === 5 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-zinc-700`} 
-              onClick={() => setFrequency(5)}
+              className={`flex-1 ${frequency === "5-6회" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
+              onClick={() => setFrequency("5-6회")}
             >
-              5회
+              5-6회
             </Button>
             <Button 
               type="button" 
-              className={`flex-1 ${frequency === 7 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-zinc-700`} 
-              onClick={() => setFrequency(7)}
+              className={`flex-1 ${frequency === "매일" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
+              onClick={() => setFrequency("매일")}
             >
-              7회
+              매일
             </Button>
           </div>
         </Field>
 
         {/* 운동 시간 선택 */}
         <Field>
-          <Label>각 운동에 할애할 수 있는 시간</Label>
+          <Label>운동 시간</Label>
           <div className="flex space-x-4">
             <Button 
               type="button" 
-              className={`flex-1 ${duration === 30 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-zinc-700`} 
-              onClick={() => setDuration(30)}
+              className={`flex-1 ${duration === "30분 이하" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
+              onClick={() => setDuration("30분 이하")}
             >
-              30분
+              30분 이하
             </Button>
             <Button 
               type="button" 
-              className={`flex-1 ${duration === 60 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-zinc-700`} 
-              onClick={() => setDuration(60)}
+              className={`flex-1 ${duration === "60분 이하" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
+              onClick={() => setDuration("60분 이하")}
             >
-              1시간
+              60분 이하
             </Button>
             <Button 
               type="button" 
-              className={`flex-1 ${duration === 90 ? 'bg-blue-500' : 'bg-zinc-800'} hover:bg-zinc-700`} 
-              onClick={() => setDuration(90)}
+              className={`flex-1 ${duration === "60분 이상" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
+              onClick={() => setDuration("60분 이상")}
             >
-              1시간 이상
+              60분 이상
             </Button>
           </div>
         </Field>
