@@ -1,0 +1,15 @@
+# 빌드 파일
+target/
+*.class
+*.jar
+
+# IDE 설정
+.idea/
+.vscode/
+*.iml
+
+# 민감한 파일
+application.properties
+*.pem
+*.env
+log.txt
