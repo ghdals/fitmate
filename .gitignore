@@ -1,15 +1,53 @@
-# 빌드 파일
+# 📦 백엔드 빌드 파일
 target/
 *.class
 *.jar
 
-# IDE 설정
-.idea/
-.vscode/
-*.iml
-
-# 민감한 파일
+# 🛡️ 민감한 파일
 application.properties
 *.pem
 *.env
 log.txt
+
+# 💻 IDE 설정
+.idea/
+.vscode/
+*.iml
+
+# 📄 프론트엔드 로그 파일
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 📁 프론트엔드 빌드/출력 디렉토리
+node_modules/
+dist/
+dist-ssr/
+out/
+build/
+.next/
+
+# 🌐 환경 변수 파일
+.env.local
+.env.development
+.env.production
+.env.test
+
+# 🧠 IDE/editor 기타 파일
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+ehthumbs.db
+*.bak
+*.swp
+*.tmp
