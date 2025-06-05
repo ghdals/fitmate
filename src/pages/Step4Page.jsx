@@ -1,15 +1,18 @@
+// src/pages/Step4Page.jsx
 import { useNavigate } from "react-router-dom";
 import { StepLayout } from "../components/step-layout";
 import { Button } from "../components/button";
 import { Field, Label } from "../components/fieldset";
 import { Heading } from "../components/heading";
 import { StepIndicator } from "../components/StepIndicator"; // StepIndicator 임포트
-import { useState } from "react"; // 상태 관리
+
+import { useDispatch, useSelector} from 'react-redux';
+import { setFrequency, setDuration } from "../store/slices/formSlice";
 
 function Step4Page() {
   const navigate = useNavigate(); // navigate 훅 사용
-  const [frequency, setFrequency] = useState(null);
-  const [duration, setDuration] = useState(null);
+  const dispatch = useDispatch();
+  const { frequency, duration } = useSelector((state)=>(state.form));
 
   const handlePrev = () => {
     navigate("/step3"); // "이전" 버튼 클릭 시 Step3으로 이동
@@ -31,34 +34,18 @@ function Step4Page() {
         <Field>
           <Label>운동 빈도 (주당)</Label>
           <div className="flex space-x-4">
-            <Button 
-              type="button" bg-teal-400 text-white
-              className={`flex-1 ${frequency === "1-2회" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
-              onClick={() => setFrequency("1-2회")}
-            >
-              1-2회
-            </Button>
-            <Button 
-              type="button" 
-              className={`flex-1 ${frequency === "3-4회" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
-              onClick={() => setFrequency("3-4회")}
-            >
-              3-4회
-            </Button>
-            <Button 
-              type="button" 
-              className={`flex-1 ${frequency === "5-6회" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
-              onClick={() => setFrequency("5-6회")}
-            >
-              5-6회
-            </Button>
-            <Button 
-              type="button" 
-              className={`flex-1 ${frequency === "매일" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
-              onClick={() => setFrequency("매일")}
-            >
-              매일
-            </Button>
+            {["1-2회", "3-4회", "5-6회", "매일"].map((option) => (
+              <Button
+                key={option}
+                type="button"
+                className={`flex-1 ${
+                  frequency === option ? "bg-teal-400 text-white" : "bg-neutral-50"
+                }`}
+                onClick={() => dispatch(setFrequency(option))}
+              >
+                {option}
+              </Button>
+            ))}
           </div>
         </Field>
 
@@ -66,27 +53,18 @@ function Step4Page() {
         <Field>
           <Label>운동 시간</Label>
           <div className="flex space-x-4">
-            <Button 
-              type="button" 
-              className={`flex-1 ${duration === "30분 이하" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
-              onClick={() => setDuration("30분 이하")}
-            >
-              30분 이하
-            </Button>
-            <Button 
-              type="button" 
-              className={`flex-1 ${duration === "60분 이하" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
-              onClick={() => setDuration("60분 이하")}
-            >
-              60분 이하
-            </Button>
-            <Button 
-              type="button" 
-              className={`flex-1 ${duration === "60분 이상" ? 'bg-teal-400 text-white' : 'bg-neutral-50'}`} 
-              onClick={() => setDuration("60분 이상")}
-            >
-              60분 이상
-            </Button>
+            {["30분 이하", "60분 이하", "60분 이상"].map((option) => (
+              <Button
+                key={option}
+                type="button"
+                className={`flex-1 ${
+                  duration === option ? "bg-teal-400 text-white" : "bg-neutral-50"
+                }`}
+                onClick={() => dispatch(setDuration(option))}
+              >
+                {option}
+              </Button>
+            ))}
           </div>
         </Field>
 

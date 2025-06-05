@@ -35,7 +35,7 @@ function LoginPage() {
     setIsLoading(true); // 로딩 상태 활성화
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/users/login`, form);
+      const response = await axios.post(`http://54.211.166.36:8080/api/users/login`, form);
       console.log("로그인 성공:", response.data);
 
       // 로그인 성공 시, JWT 토큰을 localStorage에 저장

@@ -1,3 +1,5 @@
+// src/pages/LandingPage.jsx
+
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.svg";
@@ -8,7 +10,7 @@ const LandingPage = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 로그인 상태 확인
 
   const handleStartClick = () => {
-    if (isLoggedIn) {
+    if (isLoggedIn===true) {
       navigate("/step1");
     } else {
       navigate("/register");
@@ -67,7 +69,7 @@ const LandingPage = () => {
         <div className="mt-12 text-center">
           <button
             type="button"
-            onClick={() => navigate("/step1")}
+            onClick={handleStartClick}
             className="px-6 py-3 rounded-md bg-neutral-50 text-black shadow-md hover:bg-cyan-200 transition"
           >
             지금 시작하기
