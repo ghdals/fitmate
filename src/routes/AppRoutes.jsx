@@ -10,6 +10,7 @@ import Step2Page from "../pages/Step2Page";
 import LoginPage from "../pages/LoginPage";
 import Step3Page from "../pages/Step3Page";
 import Step4Page from "../pages/Step4Page";
+import ResultPage from "../pages/ResultPage";
 import LibraryDetailPage from "../pages/LibraryDetailPage";
 
 const AppRoutes = () => {
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route path="/step2" element={<Step2Page />} />
         <Route path="/step3" element={<Step3Page/>} />
         <Route path="/step4" element={<Step4Page/>} /> 
+        <Route path="/result" element={<ResultPage/>} /> 
         <Route path="/library/:id" element={<LibraryDetailPage/>} /> 
         <Route path="*" element={<NotFound />} />
       </Routes>

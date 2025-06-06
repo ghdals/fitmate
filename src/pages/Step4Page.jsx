@@ -19,7 +19,7 @@ function Step4Page() {
   };
 
   const handleNext = () => {
-    navigate("/step5"); // "다음" 버튼 클릭 시 Step5로 이동
+    navigate("/result"); // "다음" 버튼 클릭 시 Step5로 이동
   };
 
   return (

@@ -8,6 +8,8 @@ import shoulderImg from "../assets/shoulders.svg";
 import backImg from "../assets/back.svg";
 import legsImg from "../assets/legs.svg";
 import armImg from "../assets/arm.svg";
+import calvesImg from "../assets/calves.svg";
+import cardioImg from "../assets/cardio.png";
 
 const categoryImageMap = {
   Chest: chestImg,
@@ -16,6 +18,8 @@ const categoryImageMap = {
   Arms: armImg,
   Abs: absImg,
   Legs: legsImg,
+  Calves: calvesImg,
+  Cardio: cardioImg
 };
 
 function LibraryPage() {

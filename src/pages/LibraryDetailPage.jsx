@@ -41,32 +41,24 @@ function LibraryDetailPage() {
 
                 setExercises(formatted);
             })
-
             .catch((err) => {
                 console.error("❗fetch 실패:", err);
                 setExercises([]);
             });
     }, [id]);
 
-
-
-
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            <button
-                onClick={() => navigate("/library")}
-                className="text-blue-500 hover:underline mb-4"
-            >
-                ← 라이브러리로 돌아가기
-            </button>
-
-            <Heading>운동 라이브러리</Heading>
-            <p className="text-gray-500 mb-6">
-                이 부위에 해당하는 운동들을 확인해보세요.
-            </p>
+        <div className="max-w-6xl mx-auto p-20">
+            
+            <div className="text-center mb-8">
+                <Heading>운동 라이브러리</Heading>
+                <p className="text-gray-500 mt-2">
+                    이 부위에 해당하는 운동들을 확인해보세요.
+                </p>
+            </div>
 
             {exercises.length === 0 ? (
-                <p className="text-gray-500">운동 목록이 없습니다.</p>
+                <p className="text-gray-500 text-center">운동 목록이 없습니다.</p>
             ) : (
                 <div className="flex flex-col gap-4">
                     {exercises.map((exercise, index) => (
@@ -92,8 +84,6 @@ function LibraryDetailPage() {
             )}
         </div>
     );
-    console.log("id 값:", id, typeof id);
 }
-
 
 export default LibraryDetailPage;

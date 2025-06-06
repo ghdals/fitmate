@@ -10,11 +10,12 @@ const LandingPage = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 로그인 상태 확인
 
   const handleStartClick = () => {
-    if (isLoggedIn===true) {
-      navigate("/step1");
-    } else {
-      navigate("/register");
-    }
+    // if (isLoggedIn===true) {
+    //   navigate("/step1");
+    // } else {
+    //   navigate("/step1");
+    // }
+    navigate("/step1");
   };
 
   return (
