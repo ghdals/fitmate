@@ -1,50 +1,100 @@
+// LibraryPage.jsx
 import { useEffect, useState } from "react";
 import { Heading } from "../components/heading";
 import { Link } from "react-router-dom";
+import absImg from "../assets/abs.svg";
+import chestImg from "../assets/chest.svg";
+import shoulderImg from "../assets/shoulders.svg";
+import backImg from "../assets/back.svg";
+import legsImg from "../assets/legs.svg";
+import armImg from "../assets/arm.svg";
 
-// 이미지 파일들을 import
-import chestImg from '../assets/chest.svg';
-import backImg from '../assets/back.svg';
-import shoulderImg from '../assets/shoulders.svg';
-import armImg from '../assets/arm.svg';
-import absImg from '../assets/abs.svg';
-import legsImg from '../assets/legs.svg';
-
-const dummyCategories = [
-  { name: "가슴", image: chestImg, description: "가슴 근육을 강화하고 아름다운 라인을 만들기 위한 운동입니다." },
-  { name: "등", image: backImg, description: "등 근육을 강화하여 자세를 개선하고 상체 힘을 키우는 운동입니다." },
-  { name: "어깨", image: shoulderImg, description: "어깨 근육을 강화하여 유연성과 안정성을 향상시키는 운동입니다." },
-  { name: "팔", image: armImg, description: "팔 근육을 집중적으로 단련하여 상체 균형을 맞추는 운동입니다." },
-  { name: "복부", image: absImg, description: "복근을 만들고 허리 라인을 다듬는 운동으로 체지방을 줄이는 데 도움이 됩니다." },
-  { name: "하체", image: legsImg, description: "하체 근육을 발달시켜 전신 균형을 맞추고 체력을 향상시키는 운동입니다." },
-];
+const categoryImageMap = {
+  Chest: chestImg,
+  Back: backImg,
+  Shoulders: shoulderImg,
+  Arms: armImg,
+  Abs: absImg,
+  Legs: legsImg,
+};
 
 function LibraryPage() {
+
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // 실제 API 요청 자리
-    setCategories(dummyCategories);
+    fetch("https://wger.de/api/v2/exercisecategory/")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("💡 API 카테고리 목록:", data.results);
+        // 예: [{ id: 1, name: 'Chest' }, ...]
+        const formatted = data.results.map((cat) => ({
+          id: cat.id,
+          name: cat.name,
+          image: categoryImageMap[cat.name] || "", // 없는 건 비워둠
+          description: `${cat.name} 부위의 운동을 확인해보세요.`,
+        }));
+        setCategories(formatted);
+      });
+
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <Heading>운동 부위별 라이브러리</Heading>
+    <div className="max-w-6xl mx-auto p-20">
+
+      <Heading>운동 가이드</Heading>
+
+      <form className="max-w-md mx-auto p-10">
+        <div className="flex">
+          <div className="relative w-full">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-500" aria-hidden="true" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+            </div>
+            <input
+              type="search"
+              id="default-search"
+              className="block w-full h-12 p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-l-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="데드리프트 ..."
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="h-12 px-4 text-sm font-medium text-white bg-blue-600 rounded-r-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+
+
+
+
       <p className="text-gray-500 mb-6">운동 부위를 선택해 관련 동작을 확인해보세요.</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((cat, index) => (
-          <Link to={`/library/${cat.name}`} key={index}>
-
+        {categories.map((cat) => (
+          <Link to={`/library/${cat.id}`} key={cat.id}>
             <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105 bg-white">
-              <img src={cat.image} alt={cat.name} className="w-full h-48 object-cover object-center mt-4" />
+              {/* 이미지 없음: 대체 텍스트로 출력 */}
+              {cat.image ? (
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="w-full h-48 object-cover object-center mt-4"
+                />
+              ) : (
+                <div className="flex items-center justify-center h-48 bg-gray-100 text-gray-500 text-xl">
+                  {cat.name}
+                </div>
+              )}
+
               <div className="p-4">
-                {/* 부위 이름 */}
                 <h2 className="text-xl font-semibold text-gray-900">{cat.name}</h2>
-                {/* 부위 설명 */}
                 <p className="text-sm text-gray-600 mt-2">{cat.description}</p>
-                {/* 자세히 보기 버튼 */}
-                <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                <button className="mt-4 px-4 py-2">
                   자세히 보기
                 </button>
               </div>

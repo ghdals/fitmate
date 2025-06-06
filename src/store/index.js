@@ -1,9 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
+import authReducer from "./slices/authSlice";
+import adminReducer from "./slices/adminSlice";
+import workoutReducer from "./slices/workoutSlice";
 
 export const store = configureStore({
   reducer: {
-    user: userReducer, // 여러 개의 slice를 여기에 추가 가능
+    user: userReducer,
+    auth: authReducer,
+    admin: adminReducer,
+    workout: workoutReducer
   },
 });
 

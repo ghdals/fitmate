@@ -1,47 +1,72 @@
-import { Link, useNavigate } from "react-router-dom";  // useNavigate를 추가
-import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/slices/authSlice";
 
 function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  // 컴포넌트가 마운트될 때, 로그인 상태 확인
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      setIsLoggedIn(true);  // 토큰이 있으면 로그인 상태로 간주
-    }
-  }, []);
+  const dispatch = useDispatch();
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
 
   // 로그아웃 처리
   const handleLogout = () => {
-    localStorage.removeItem("authToken");  // 토큰 삭제
-    setIsLoggedIn(false);  // 로그인 상태 업데이트
-    navigate("/login");  // 로그인 페이지로 리다이렉트
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
-    <nav className="w-full bg-black text-white shadow-md p-4 flex justify-between items-center">
-      <div className="text-xl font-bold mr-220">
-        <Link to="/">FITMATE</Link>
-      </div>
-      <div className="flex items-center space-x-4">
-        <Link to="/library" className="hover:text-gray-400">LIBRARY</Link>
-
-        {/* 로그인 상태에 따라 다른 버튼 표시 */}
-        {isLoggedIn ? (
-          <>
-            <Link to="/my" className="hover:text-gray-400">My Page</Link>
-            <button
-              onClick={handleLogout}
-              className="hover:text-gray-400 text-white bg-transparent border-none cursor-pointer"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <Link to="/login" className="text-white hover:text-gray-400 no-underline">LOGIN</Link>
-        )}
+    <nav className="w-full bg-black text-white shadow-md p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-2xl font-bold">
+          <Link to="/" className="hover:text-gray-300 transition-colors">
+            FITMATE
+          </Link>
+        </div>
+        
+        <div className="flex items-center space-x-6">
+          <Link 
+            to="/library" 
+            className="hover:text-gray-300 transition-colors"
+          >
+            LIBRARY
+          </Link>
+          
+          {isLoggedIn ? (
+            <div className="flex items-center space-x-6">
+              <Link 
+                to="/my" 
+                className="hover:text-gray-300 transition-colors"
+              >
+                MY PAGE
+              </Link>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-300">
+                  {user?.name || '사용자'}님
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-1 bg-red-600 hover:bg-red-700 rounded text-sm transition-colors"
+                >
+                  로그아웃
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Link 
+                to="/login" 
+                className="px-4 py-1 border border-white rounded hover:bg-white hover:text-black transition-colors"
+              >
+                로그인
+              </Link>
+              <Link 
+                to="/register" 
+                className="px-4 py-1 bg-blue-600 hover:bg-blue-700 rounded transition-colors"
+              >
+                회원가입
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
