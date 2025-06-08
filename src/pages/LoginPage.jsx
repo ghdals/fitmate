@@ -1,6 +1,9 @@
+// src/pages/LoginPage.jsx
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";  // useNavigate 훅 추가
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/slices/authSlice";
 import { AuthLayout } from "../components/auth-layout";
 import { Button } from "../components/button";
 import { Field, Label } from "../components/fieldset";
@@ -11,9 +14,10 @@ import { Text, TextLink, Strong } from "../components/text";
 function LoginPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [form, setForm] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");  // 에러 상태 관리
-  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
-  const navigate = useNavigate();  // 페이지 이동을 위한 navigate 훅
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 입력값 변경 처리
   const handleChange = (e) => {
@@ -24,31 +28,54 @@ function LoginPage() {
   // 로그인 요청 처리
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");  // 로그인 시 이전 에러를 초기화
+    setError("");
 
-    // 유효성 검사: 이메일과 비밀번호가 빈 값일 경우 로그인 요청을 막음
+    // 유효성 검사
     if (!form.email || !form.password) {
       setError("이메일과 비밀번호를 모두 입력해주세요.");
       return;
     }
 
-    setIsLoading(true); // 로딩 상태 활성화
+    setIsLoading(true);
 
     try {
-      const response = await axios.post(`http://54.211.166.36:8080/api/users/login`, form);
+      // 환경변수 사용으로 수정
+      const response = await axios.post(`${API_BASE_URL}/api/users/login`, form);
       console.log("로그인 성공:", response.data);
 
-      // 로그인 성공 시, JWT 토큰을 localStorage에 저장
+      // JWT 토큰을 localStorage에 저장
       localStorage.setItem("authToken", response.data.token);
 
+      // Redux 상태 업데이트
+      dispatch(login({
+        id: response.data.user?.id,
+        username: response.data.user?.username,
+        email: response.data.user?.email
+      }));
+
+      // localStorage에 로그인 정보 저장 (자동 로그인 유지용)
+      localStorage.setItem("auth", JSON.stringify({
+        isLoggedIn: true,
+        user: {
+          id: response.data.user?.id,
+          username: response.data.user?.username,
+          email: response.data.user?.email
+        }
+      }));
+
       // 로그인 후 LandingPage로 이동
-      navigate("/");  // 예: 로그인 후 LandingPage로 이동
+      navigate("/");
       alert("로그인 성공!");
     } catch (error) {
       console.error("로그인 오류:", error.response?.data || error.message);
-      setError("로그인 실패: 이메일 또는 비밀번호가 잘못되었습니다.");
+      
+      // 서버에서 반환하는 구체적인 에러 메시지 사용
+      const errorMessage = error.response?.data?.message || 
+                          error.response?.data || 
+                          "이메일 또는 비밀번호가 잘못되었습니다.";
+      setError(`로그인 실패: ${errorMessage}`);
     } finally {
-      setIsLoading(false); // 로딩 상태 비활성화
+      setIsLoading(false);
     }
   };
 

@@ -29,7 +29,7 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 방지
     try {
-      const response = await axios.post(`http://54.211.166.36:8080/api/users/signup`, form);
+      const response = await axios.post(`http://54.85.169.70:8080/api/users/signup`, form);
       console.log("회원가입 응답:", response.data); // 응답 데이터 확인용 로그 추가
       alert(`${form.username}님, 회원가입이 완료되었습니다! 로그인하여 서비스를 이용해 보세요.`);
     } catch (error) {

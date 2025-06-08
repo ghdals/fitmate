@@ -5,7 +5,7 @@ import { logout } from '../store/slices/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 function NavBar() {
-  const { isLoggined, user } = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth); // 오타 수정
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,16 +20,16 @@ function NavBar() {
       <div className="flex items-center space-x-4">
         <Link to="/library">LIBRARY</Link>
 
-        {!isLoggined ? (
+        {!isLoggedIn ? ( // 오타 수정
           <>
-          <Link to="/login">LOGIN</Link>
-          <Link to="/register">SIGN UP</Link>
+            <Link to="/login">LOGIN</Link>
+            <Link to="/register">SIGN UP</Link>
           </>
         ) : (
           <>
             <Link to="/mypage">MYPAGE</Link>
-            <span className="text-sm">{user?.name}님</span>
-            <button onClick={handleLogout}>LOGOUT</button>
+
+            <button className="hover:text-rose-600 transition-colors cursor-pointer" onClick={handleLogout}>LOGOUT</button>
           </>
         )}
       </div>
