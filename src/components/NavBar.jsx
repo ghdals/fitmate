@@ -24,6 +24,7 @@ function NavBar() {
           <>
             <Link to="/login">LOGIN</Link>
             <Link to="/register">SIGN UP</Link>
+            <Link to="/mypage">MYPAGE</Link>
           </>
         ) : (
           <>

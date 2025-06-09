@@ -1,3 +1,5 @@
+// src/routes/AppRoutes.jsx
+
 import { Routes, Route } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import LandingPage from "../pages/LandingPage";
@@ -11,6 +13,7 @@ import LoginPage from "../pages/LoginPage";
 import Step3Page from "../pages/Step3Page";
 import Step4Page from "../pages/Step4Page";
 import ResultPage from "../pages/ResultPage";
+import ProfilePage from "../pages/ProfilePage";
 import LibraryDetailPage from "../pages/LibraryDetailPage";
 
 const AppRoutes = () => {
@@ -22,6 +25,7 @@ const AppRoutes = () => {
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/mypage" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/step1" element={<Step1Page />} />
         <Route path="/step2" element={<Step2Page />} />
@@ -29,6 +33,7 @@ const AppRoutes = () => {
         <Route path="/step4" element={<Step4Page/>} /> 
         <Route path="/result" element={<ResultPage/>} /> 
         <Route path="/library/:id" element={<LibraryDetailPage/>} /> 
+        <Route path="library/search" element={<LibraryDetailPage/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
