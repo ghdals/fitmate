@@ -6,23 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExerciseService {
 
-    @Autowired
-    private ExerciseRepository exerciseRepository;
+    private final ExerciseRepository exerciseRepository;
 
-    // 모든 운동 조회
+    @Autowired
+    public ExerciseService(ExerciseRepository exerciseRepository) {
+        this.exerciseRepository = exerciseRepository;
+    }
+
     public List<Exercise> getAllExercises() {
         return exerciseRepository.findAll();
     }
 
-    // 운동 아이디로 상세 조회
-    public Optional<Exercise> getExerciseByExerciseId(String exerciseId) {
-        return exerciseRepository.findByExerciseId(exerciseId);
+    public List<Exercise> getExercisesByCategory(String categoryName) {
+        return exerciseRepository.findByCategoryNameContainingIgnoreCase(categoryName);
     }
 
-    // 검색(이름 포함) 같은건 나중에 추가 가능
+    public List<Exercise> searchExercises(String keyword) {
+        return exerciseRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword, keyword);
+    }
 }

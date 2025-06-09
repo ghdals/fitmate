@@ -2,14 +2,14 @@ package com.example.demo.repository;
 
 import com.example.demo.model.Exercise;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
-@Repository
 public interface ExerciseRepository extends MongoRepository<Exercise, String> {
-    Optional<Exercise> findByExerciseId(String exerciseId);
-
-    // 중복 여부 확인 메서드 추가
     boolean existsByExerciseId(String exerciseId);
+
+    // ✅ 부분 일치 + 대소문자 무시
+    List<Exercise> findByCategoryNameContainingIgnoreCase(String categoryName);
+
+    List<Exercise> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String desc);
 }

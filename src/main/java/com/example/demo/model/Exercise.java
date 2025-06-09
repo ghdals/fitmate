@@ -11,169 +11,80 @@ public class Exercise {
     @Id
     private String id;  // MongoDB ObjectId
 
-    private String exerciseId;  // 외부에서 받은 운동 고유 ID
-    private String name;
-    private String imageUrl;
-    private String description;
-    private List<String> equipments;
-    private List<String> bodyParts;
-    private String exerciseType;
-    private List<String> targetMuscles;
-    private List<String> secondaryMuscles;
-    private String videoUrl;
-    private List<String> keywords;
-    private String overview;
-    private List<String> instructions;
-    private List<String> exerciseTips;
-    private List<String> variations;
-    private List<String> relatedExerciseIds;
+    private String exerciseId;        // Wger API 운동 고유 ID
+    private String name;              // 운동 이름 (한국어 번역 포함)
+    private String imageUrl;          // 대표 이미지 URL
+    private String description;       // 설명 (한국어 번역 포함)
+    private List<String> equipments;  // 필요한 장비들
+    private List<String> bodyParts;   // 적용 부위 (예: 가슴, 등 등) - 지금은 비워둬도 됨
+    private String exerciseType;      // 운동 유형 (선택사항)
+    private List<String> targetMuscles;       // 주 타겟 근육 ID
+    private List<String> secondaryMuscles;    // 보조 근육 ID
+    private String videoUrl;          // 영상 URL (추후 확장 가능)
+    private List<String> keywords;    // 키워드 (추후 확장 가능)
+    private String overview;          // 개요 (선택사항)
+    private List<String> instructions;        // 지침 (선택사항)
+    private List<String> exerciseTips;        // 팁 (선택사항)
+    private List<String> variations;          // 변형 운동 ID
+    private List<String> relatedExerciseIds;  // 연관 운동 ID
+    private String categoryId;        // 운동 카테고리 ID
+    private String categoryName;
 
-    // 새로 추가한 필드
-    private String categoryId;
+    // === Getters & Setters ===
 
-    // 기존 getter/setter + 새 필드 getter/setter
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public String getId() {
-        return id;
-    }
+    public String getExerciseId() { return exerciseId; }
+    public void setExerciseId(String exerciseId) { this.exerciseId = exerciseId; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getExerciseId() {
-        return exerciseId;
-    }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-    public void setExerciseId(String exerciseId) {
-        this.exerciseId = exerciseId;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public String getName() {
-        return name;
-    }
+    public List<String> getEquipments() { return equipments; }
+    public void setEquipments(List<String> equipments) { this.equipments = equipments; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public List<String> getBodyParts() { return bodyParts; }
+    public void setBodyParts(List<String> bodyParts) { this.bodyParts = bodyParts; }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+    public String getExerciseType() { return exerciseType; }
+    public void setExerciseType(String exerciseType) { this.exerciseType = exerciseType; }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    public List<String> getTargetMuscles() { return targetMuscles; }
+    public void setTargetMuscles(List<String> targetMuscles) { this.targetMuscles = targetMuscles; }
 
-    public String getDescription() {
-        return description;
-    }
+    public List<String> getSecondaryMuscles() { return secondaryMuscles; }
+    public void setSecondaryMuscles(List<String> secondaryMuscles) { this.secondaryMuscles = secondaryMuscles; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getVideoUrl() { return videoUrl; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
 
-    public List<String> getEquipments() {
-        return equipments;
-    }
+    public List<String> getKeywords() { return keywords; }
+    public void setKeywords(List<String> keywords) { this.keywords = keywords; }
 
-    public void setEquipments(List<String> equipments) {
-        this.equipments = equipments;
-    }
+    public String getOverview() { return overview; }
+    public void setOverview(String overview) { this.overview = overview; }
 
-    public List<String> getBodyParts() {
-        return bodyParts;
-    }
+    public List<String> getInstructions() { return instructions; }
+    public void setInstructions(List<String> instructions) { this.instructions = instructions; }
 
-    public void setBodyParts(List<String> bodyParts) {
-        this.bodyParts = bodyParts;
-    }
+    public List<String> getExerciseTips() { return exerciseTips; }
+    public void setExerciseTips(List<String> exerciseTips) { this.exerciseTips = exerciseTips; }
 
-    public String getExerciseType() {
-        return exerciseType;
-    }
+    public List<String> getVariations() { return variations; }
+    public void setVariations(List<String> variations) { this.variations = variations; }
 
-    public void setExerciseType(String exerciseType) {
-        this.exerciseType = exerciseType;
-    }
+    public List<String> getRelatedExerciseIds() { return relatedExerciseIds; }
+    public void setRelatedExerciseIds(List<String> relatedExerciseIds) { this.relatedExerciseIds = relatedExerciseIds; }
 
-    public List<String> getTargetMuscles() {
-        return targetMuscles;
-    }
-
-    public void setTargetMuscles(List<String> targetMuscles) {
-        this.targetMuscles = targetMuscles;
-    }
-
-    public List<String> getSecondaryMuscles() {
-        return secondaryMuscles;
-    }
-
-    public void setSecondaryMuscles(List<String> secondaryMuscles) {
-        this.secondaryMuscles = secondaryMuscles;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
-
-    public List<String> getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public List<String> getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(List<String> instructions) {
-        this.instructions = instructions;
-    }
-
-    public List<String> getExerciseTips() {
-        return exerciseTips;
-    }
-
-    public void setExerciseTips(List<String> exerciseTips) {
-        this.exerciseTips = exerciseTips;
-    }
-
-    public List<String> getVariations() {
-        return variations;
-    }
-
-    public void setVariations(List<String> variations) {
-        this.variations = variations;
-    }
-
-    public List<String> getRelatedExerciseIds() {
-        return relatedExerciseIds;
-    }
-
-    public void setRelatedExerciseIds(List<String> relatedExerciseIds) {
-        this.relatedExerciseIds = relatedExerciseIds;
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
+    public String getCategoryId() { return categoryId; }
+    public void setCategoryId(String categoryId) { this.categoryId = categoryId; }
+    public String getCategoryName() { return categoryName; }
+    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
 }
