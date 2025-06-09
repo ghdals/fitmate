@@ -22,7 +22,7 @@ const LandingPage = () => {
           <p className="mt-4 text-gray-700">당신을 위한 맞춤형 운동 플랜</p>
           <Button 
             onClick={handleStartClick}
-            className="mt-6 px-8 py-4 rounded-full font-semibold transition-colors"
+            className="mt-6 px-8 py-4"
           >
             시작하기
           </Button>

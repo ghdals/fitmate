@@ -1,6 +1,9 @@
+// src/pages/LoginPage.jsx
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";  // useNavigate 훅 추가
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/slices/authSlice";
 import { AuthLayout } from "../components/auth-layout";
 import { Button } from "../components/button";
 import { Field, Label } from "../components/fieldset";
@@ -11,9 +14,10 @@ import { Text, TextLink, Strong } from "../components/text";
 function LoginPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [form, setForm] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");  // 에러 상태 관리
-  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
-  const navigate = useNavigate();  // 페이지 이동을 위한 navigate 훅
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 입력값 변경 처리
   const handleChange = (e) => {
@@ -24,31 +28,45 @@ function LoginPage() {
   // 로그인 요청 처리
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");  // 로그인 시 이전 에러를 초기화
+    setError("");
 
-    // 유효성 검사: 이메일과 비밀번호가 빈 값일 경우 로그인 요청을 막음
     if (!form.email || !form.password) {
       setError("이메일과 비밀번호를 모두 입력해주세요.");
       return;
     }
 
-    setIsLoading(true); // 로딩 상태 활성화
+    setIsLoading(true);
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/users/login`, form);
-      console.log("로그인 성공:", response.data);
+      // 관리자 로그인 시도
+      const isAdminLogin = form.email === "admin@test.com";
+      const loginEndpoint = isAdminLogin 
+        ? `${API_BASE_URL}/admin/login` 
+        : `${API_BASE_URL}/users/login`;
 
-      // 로그인 성공 시, JWT 토큰을 localStorage에 저장
+      const response = await axios.post(loginEndpoint, form);
+      console.log("로그인 응답:", response.data);
+      
+      // 토큰 저장
       localStorage.setItem("authToken", response.data.token);
+      
+      // Redux 상태 업데이트
+      dispatch(login({
+        token: response.data.token,
+        user: response.data.user,
+        isAdmin: isAdminLogin
+      }));
 
-      // 로그인 후 LandingPage로 이동
-      navigate("/");  // 예: 로그인 후 LandingPage로 이동
+      // 로그인 후 이동 경로 결정
+      const redirectPath = isAdminLogin ? "/admin" : "/";
+      navigate(redirectPath);
+
       alert("로그인 성공!");
     } catch (error) {
       console.error("로그인 오류:", error.response?.data || error.message);
       setError("로그인 실패: 이메일 또는 비밀번호가 잘못되었습니다.");
     } finally {
-      setIsLoading(false); // 로딩 상태 비활성화
+      setIsLoading(false);
     }
   };
 

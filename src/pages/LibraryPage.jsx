@@ -2,12 +2,15 @@
 import { useEffect, useState } from "react";
 import { Heading } from "../components/heading";
 import { Link } from "react-router-dom";
+import axios from "axios"; 
 import absImg from "../assets/abs.svg";
 import chestImg from "../assets/chest.svg";
 import shoulderImg from "../assets/shoulders.svg";
 import backImg from "../assets/back.svg";
 import legsImg from "../assets/legs.svg";
 import armImg from "../assets/arm.svg";
+import calvesImg from "../assets/calves.svg";
+import cardioImg from "../assets/cardio.svg";
 
 const categoryImageMap = {
   Chest: chestImg,
@@ -16,28 +19,35 @@ const categoryImageMap = {
   Arms: armImg,
   Abs: absImg,
   Legs: legsImg,
+  Calves: calvesImg,
+  Cardio: cardioImg
 };
 
 function LibraryPage() {
 
   const [categories, setCategories] = useState([]);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    fetch("https://wger.de/api/v2/exercisecategory/")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/exercises`);
+        const data = response.data;
         console.log("💡 API 카테고리 목록:", data.results);
-        // 예: [{ id: 1, name: 'Chest' }, ...]
+        
         const formatted = data.results.map((cat) => ({
           id: cat.id,
           name: cat.name,
-          image: categoryImageMap[cat.name] || "", // 없는 건 비워둠
+          image: categoryImageMap[cat.name] || "",
           description: `${cat.name} 부위의 운동을 확인해보세요.`,
         }));
         setCategories(formatted);
-      });
-
-  }, []);
+      } catch (error) {
+        console.error("카테고리 불러오기 오류:", error);
+      }
+    };
+    fetchCategories();
+  }, [API_BASE_URL]);
 
   return (
     <div className="max-w-6xl mx-auto p-20">

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios"; 
 import { Heading } from "../components/heading";
 
 function LibraryDetailPage() {
     const { id } = useParams(); // 카테고리 ID
     const [exercises, setExercises] = useState([]);
     const navigate = useNavigate();
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         console.log("현재 파라미터 id:", id, typeof id);
@@ -15,20 +17,15 @@ function LibraryDetailPage() {
             return;
         }
 
-        const categoryId = Number(id);
-        console.log("변환된 categoryId:", categoryId);
+        const fetchExercises = async () => {
+            try {
+                const categoryId = Number(id);
+                console.log("변환된 categoryId:", categoryId);
 
-        const url = `https://wger.de/api/v2/exerciseinfo/?category=${categoryId}&language=10`;
-        console.log("요청 URL:", url);
-
-        fetch(url)
-            .then((res) => {
-                console.log("응답 상태:", res.status);
-                return res.json();
-            })
-            .then((data) => {
-                console.log("첫 번째 결과:", data.results[0]);
-
+                const response = await axios.get(`${API_BASE_URL}/exercises/category/${categoryId}`);
+                const data = response.data;
+                console.log("운동 데이터:", data.results);
+                
                 const formatted = data.results.map((ex) => {
                     const translated = ex.translations?.[0];
 
@@ -40,33 +37,26 @@ function LibraryDetailPage() {
                 });
 
                 setExercises(formatted);
-            })
-
-            .catch((err) => {
-                console.error("❗fetch 실패:", err);
+            } catch (error) {
+                console.error("운동 데이터 불러오기 오류:", error);
                 setExercises([]);
-            });
-    }, [id]);
-
-
-
+            }
+        };
+        fetchExercises();
+    }, [id, API_BASE_URL]);
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            <button
-                onClick={() => navigate("/library")}
-                className="text-blue-500 hover:underline mb-4"
-            >
-                ← 라이브러리로 돌아가기
-            </button>
-
-            <Heading>운동 라이브러리</Heading>
-            <p className="text-gray-500 mb-6">
-                이 부위에 해당하는 운동들을 확인해보세요.
-            </p>
+        <div className="max-w-6xl mx-auto p-20">
+            
+            <div className="text-center mb-8">
+                <Heading>운동 라이브러리</Heading>
+                <p className="text-gray-500 mt-2">
+                    이 부위에 해당하는 운동들을 확인해보세요.
+                </p>
+            </div>
 
             {exercises.length === 0 ? (
-                <p className="text-gray-500">운동 목록이 없습니다.</p>
+                <p className="text-gray-500 text-center">운동 목록이 없습니다.</p>
             ) : (
                 <div className="flex flex-col gap-4">
                     {exercises.map((exercise, index) => (
@@ -92,8 +82,6 @@ function LibraryDetailPage() {
             )}
         </div>
     );
-    console.log("id 값:", id, typeof id);
 }
-
 
 export default LibraryDetailPage;
