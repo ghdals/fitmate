@@ -1,3 +1,5 @@
+//src/store/index.js
+
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import formReducer from './slices/formSlice';

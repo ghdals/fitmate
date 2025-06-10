@@ -2,6 +2,7 @@ import { useState, useRef } from "react"; // useState와 useRef 훅 추가
 import logo from "../assets/logo.svg";
 
 const ProfileHeader = ({ userData }) => {
+  
   // 프로필 이미지 상태 관리
   const [profileImage, setProfileImage] = useState(logo);
   // 파일 입력 요소에 접근하기 위한 ref
@@ -50,7 +51,7 @@ const ProfileHeader = ({ userData }) => {
           </div>
           {/* 정보: 우측 끝에 세로 배치 */}
           <div className="flex-1 flex flex-col items-end ml-8">
-            <h1 className="text-3xl font-bold">{userData.name}</h1>
+            <h1 className="text-3xl font-bold">{userData.username}</h1>
             <p className="text-gray-600 mt-2">{userData.email}</p>
             <div className="mt-4">
               <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">

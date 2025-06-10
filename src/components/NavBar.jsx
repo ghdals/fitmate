@@ -24,12 +24,10 @@ function NavBar() {
           <>
             <Link to="/login">LOGIN</Link>
             <Link to="/register">SIGN UP</Link>
-            <Link to="/mypage">MYPAGE</Link>
           </>
         ) : (
           <>
             <Link to="/mypage">MYPAGE</Link>
-
             <button className="hover:text-rose-600 transition-colors cursor-pointer" onClick={handleLogout}>LOGOUT</button>
           </>
         )}

@@ -48,18 +48,18 @@ function LoginPage() {
 
       // Redux 상태 업데이트
       dispatch(login({
-        id: response.data.user?.id,
-        username: response.data.user?.username,
-        email: response.data.user?.email
+        id: response.data.id,
+        username: response.data.username,
+        email: response.data.email
       }));
 
       // localStorage에 로그인 정보 저장 (자동 로그인 유지용)
       localStorage.setItem("auth", JSON.stringify({
         isLoggedIn: true,
         user: {
-          id: response.data.user?.id,
-          username: response.data.user?.username,
-          email: response.data.user?.email
+          id: response.data.id,
+          username: response.data.username,
+          email: response.data.email
         }
       }));
 
