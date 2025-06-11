@@ -15,6 +15,9 @@ import Step4Page from "../pages/Step4Page";
 import ResultPage from "../pages/ResultPage";
 import ProfilePage from "../pages/ProfilePage";
 import LibraryDetailPage from "../pages/LibraryDetailPage";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import UserManagement from "../pages/admin/UserManagement";
+import ExerciseManagement from "../pages/admin/ExerciseManagement";
 
 const AppRoutes = () => {
   return (
@@ -35,6 +38,11 @@ const AppRoutes = () => {
         <Route path="/library/:id" element={<LibraryDetailPage/>} /> 
         <Route path="library/search" element={<LibraryDetailPage/>} />
         <Route path="*" element={<NotFound />} />
+
+        {/* 관리자 전용 라우트 */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/users" element={<UserManagement />} />
+        <Route path="/admin/exercises" element={<ExerciseManagement />} />
       </Routes>
     </>
   );

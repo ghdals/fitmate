@@ -18,7 +18,7 @@ const dummyUserData = {
   username: "홍길동", // Redux 호환성을 위해 추가
   email: "user@example.com",
   height: "175",
-  weight: "60",
+  weight: "72",
   gender: "male",
   exerciseLevel: "beginner",
   level: "beginner", // Redux 호환성을 위해 추가
@@ -166,10 +166,7 @@ const ProfilePage = () => {
           userData={{
             name: userData.name || userData.username,
             username: userData.username || userData.name,
-            email: userData.email,
-            height: userData.height,
-            weight: userData.weight,
-            gender: userData.gender
+            email: userData.email
           }}
         />
       </div>
@@ -190,12 +187,12 @@ const ProfilePage = () => {
           <div className="bg-white rounded-lg shadow p-6">
             <ProfileStats 
               userData={{
-                goal: userData.goal,
-                height: userData.height,
-                weight: userData.weight,
-                duration: userData.duration,
-                frequency: userData.frequency,
-                level: userData.level || userData.exerciseLevel
+                goal: dummyUserData.goal,
+                height: dummyUserData.height,
+                weight: dummyUserData.weight,
+                duration: dummyUserData.duration,
+                frequency: dummyUserData.frequency,
+
               }}
             />
           </div>

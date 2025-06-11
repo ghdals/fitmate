@@ -65,7 +65,7 @@ function LoginPage() {
 
       // 로그인 후 LandingPage로 이동
       navigate("/");
-      alert("로그인 성공!");
+      
     } catch (error) {
       console.error("로그인 오류:", error.response?.data || error.message);
       

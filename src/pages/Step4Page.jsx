@@ -19,7 +19,7 @@ function Step4Page() {
   };
 
   const handleNext = () => {
-    navigate("/result"); // "다음" 버튼 클릭 시 Step5로 이동
+    navigate("/result"); // "다음" 버튼 클릭 시 api호출 - 결과페이지
   };
 
   return (
@@ -78,11 +78,11 @@ function Step4Page() {
             이전
           </Button>
 
-          {/* 다음 버튼: Step5으로 이동 */}
+          {/* 다음 버튼: /result로 이동 */}
           <Button 
             type="button" 
             className="flex-1"
-            onClick={handleNext} // Step5으로 이동
+            onClick={handleNext}
           >
             다음
           </Button>

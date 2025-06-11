@@ -8,13 +8,14 @@ import { Heading } from "../components/heading";
 import { Input } from "../components/input";
 import { Strong, Text, TextLink } from "../components/text";
 import { Logo } from "../components/logo";
-
+import { useNavigate } from "react-router-dom";
 // 회원가입 페이지 컴포넌트
 function RegisterPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // 환경 변수에서 API 주소 불러오기
   
   // 회원가입 폼 데이터 관리 (id → 아이디, username → 이름)
   const [form, setForm] = useState({ id: "", username: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   // 입력 값 변경 시 상태 업데이트
   const handleChange = (e) => {
@@ -32,6 +33,7 @@ function RegisterPage() {
       const response = await axios.post(`${API_BASE_URL}/api/users/signup`, form);
       console.log("회원가입 응답:", response.data); // 응답 데이터 확인용 로그 추가
       alert(`${form.username}님, 회원가입이 완료되었습니다! 로그인하여 서비스를 이용해 보세요.`);
+      navigate("/");
     } catch (error) {
       console.error("회원가입 오류:", error.response?.data || error.message);
       alert("회원가입 실패: " + (error.response?.data || "Unknown error")); // 오류 발생 시 메시지 표시
